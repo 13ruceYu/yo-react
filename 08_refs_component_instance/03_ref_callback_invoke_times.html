@@ -28,16 +28,19 @@
         alert(this.input1.value);
       }
 
-      saveInput = (el) => {
-        console.log(el);
+      saveRef = (el) => {
         this.input1 = el;
+        console.log('@: ', this.input1);
       }
 
       render() {
         return (
           <div>
             <h2>today is so fucking {this.state.isHot ? 'hot' : 'cold'}!</h2>
-            <input ref={this.saveInput} type="text" placeholder="点击按钮显示数据" /> &nbsp;
+            {/* 当 ref 回调函数以内联方式定义，在组件更新过程中，会被调用 2 次，第一次参数为 null，第二次参数为 DOM 元素。 */}
+            {/* <input ref={el => { this.input1 = el; console.log('@', this.input1) }} type="text" placeholder="点击按钮显示数据" /> &nbsp; */}
+            {/* 但是没有影响，如果想要避免，可以采用 class 绑定的方式 👇 */}
+            <input ref={this.saveRef} type="text" placeholder="点击按钮显示数据" /> &nbsp;
             <button onClick={this.alertData}>点击提示输入的内容</button> &nbsp;
             <button onClick={this.changeWeather}>点击切换天气</button>
           </div>

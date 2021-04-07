@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>uncontrolled component</title>
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="../js/prop-types.js"></script>
+  <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    class ControlledComponent extends React.Component {
+      handleSubmit = (e) => {
+        e.preventDefault();
+        const { password, username } = this;
+        alert(`username is ${username.value}, password is ${password.value}`);
+      }
+      // 这个就是非受控组件，输入项的值现用现取
+      render() {
+        return (
+          <form onSubmit={this.handleSubmit}>
+            username: <input ref={el => this.username = el} type="text" name="username" /> <br />
+            password: <input ref={el => this.password = el} type="text" name="password" /> <br />
+            <button>Login</button>
+          </form>
+        )
+      }
+    }
+
+    ReactDOM.render(<ControlledComponent />, document.getElementById('root'));
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>高阶函数 & 函数柯里化</title>
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="../js/prop-types.js"></script>
+  <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    class UncontrolledComponent extends React.Component {
+      state = { username: '', password: '' }
+
+      //#region
+      /* 
+        高阶函数：符合下面任一描述，皆为高阶函数
+          1. 若 A 函数，接受的参数是一个函数，则 A 函数可称之为高阶函数；
+          2. 若 A 函数，调用后返回值是一个函数，则 A 函数可称之为高阶函数。
+          常见的高阶函数：Promise，new Promise(()=>{})
+                       setTimeout, ...
+                       array.map, ...
+        
+        函数柯里化：通过函数调用继续返回函数的方式，实现多次接受参数，最后统一处理的函数编码方式。
+       */
+      //#endregion
+      setFormData = (dataType) => {
+        return (e) => {
+          console.log(e, dataType);
+          this.setState({ [dataType]: e.target.value })
+        }
+      }
+
+      handleSubmit = (e) => {
+        e.preventDefault();
+        const { password, username } = this.state;
+        alert(`username is ${username}, password is ${password}`);
+      }
+
+      render() {
+        return (
+          <form onSubmit={this.handleSubmit}>
+            username: <input onChange={this.setFormData('username')} type="text" name="username" /> <br />
+            password: <input onChange={this.setFormData('password')} type="text" name="password" /> <br />
+            <button>Login</button>
+          </form>
+        )
+      }
+    }
+
+    ReactDOM.render(<UncontrolledComponent />, document.getElementById('root'));
+  </script>
+</body>
+
+</html>
