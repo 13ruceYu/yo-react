@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>jsx_practice</title>
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+
+    const data = ['vue', 'react', 'angular'];
+
+    const VDOM = (
+      <div>
+        <h1>前端框架列表</h1>
+        <ul>
+          {
+            data.map((item, index) => {
+              return <li key={index}>{item}</li>
+            })
+          }
+        </ul>
+      </div>
+    );
+
+    /*
+      区分 【js 表达式】 和 【js 语句】
+      1. 表达式：表达式一定会产生一个值，可以放在任何需要值的地方
+         (1). a
+         (2). a+b
+         (3). func(1)
+         (4). arr.map()
+         (5). function test () {}
+      
+      2. 语句（代码）：
+         if () {}
+         for () {}
+         switch () {}
+    */
+
+    ReactDOM.render(VDOM, document.getElementById('root'));
+  </script>
+</body>
+
+</html>

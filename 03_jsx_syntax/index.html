@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>jsx_syntax</title>
+  <style>
+    .title {
+      background-color: orange;
+    }
+
+    .umi {
+      background-color: pink;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    const myId = 'uMi';
+    const myData = 'hOlLo wOrLd';
+
+    const VDOM = (
+      <div>
+        <h1 className='title' id={myId.toLowerCase()}>
+          {myData.toUpperCase()}
+        </h1>
+        <h2 className={myId.toLowerCase()} style={{ display: 'inline-block' }}>
+          {myData.toLowerCase()}
+          <img src="https://placekitten.com/500/500" />
+        </h2>
+      </div>
+    );
+
+    /*
+      jsx 语法规则：
+        1. 定义虚拟 DOM 时，不需要写引号；
+        2. 标签中混入 JS 表达式，使用 {} 包裹；
+        3. 样式属性类名使用 className，而不是 class；
+        4. 内联样式使用 {{}} 包裹：style={{key：value}}；
+        5. 只能有一个根标签；
+        6. 标签必须闭合 <input />, <img />;
+        7. 标签首字母：
+            (1). 小写开头，则转换为同名 HTML 元素，若无同名元素，则报错；
+            (2). 大写开头，则寻找对应 React 组件渲染，若无对应组件，则报错。
+    */
+
+    ReactDOM.render(VDOM, document.getElementById('root'));
+  </script>
+</body>
+
+</html>

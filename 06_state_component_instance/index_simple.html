@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>react-state-simple</title>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    // 1. create components
+    class Weather extends React.Component {
+      // 初始化状态
+      state = { isHot: true, wind: '狂风' }
+
+      render() {
+        return (
+          <div className="weather">
+            <h1 onClick={this.changeWeather}>today is so fucking {this.state.isHot ? 'hot' : 'cold'}, {this.state.wind}</h1>
+          </div>
+        )
+      }
+
+      // 自定义方法：使用赋值语句 + 箭头函数
+      changeWeather = () => {
+        this.setState({ isHot: !this.state.isHot })
+      }
+    }
+
+    ReactDOM.render(<Weather />, document.getElementById('root'));
+  </script>
+</body>
+
+</html>
