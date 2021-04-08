@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>key 的作用</title>
+</head>
+<body>
+  <div id="root"></div>
+  <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="../js/prop-types.js"></script>
+  <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+    /*
+      Q1. vue/react 循环时，key 有什么作用？
+      Q2. 为什么便利列表时，key 最好不要用 index？
+
+      A1. 虚拟 DOM 中 key 的作用：
+        1). 简单的说：key 是虚拟 DOM 对象的标识，在更新时 key 起着极其重要的作用。
+
+        2). 详细的说：当状态的中的数据发生变化时，react 会根据【新数据】生成【新的虚拟 DOM】，
+            React diff【新虚拟 DOM】和【旧虚拟 DOM】的规则如下：
+
+            a. 当【旧虚拟 DOM】中找到了与【新虚拟 DOM】中相同的 key 时：
+              (1). 若二者内容没变，则直接使用之前的真实 DOM；
+              (2). 若内容变了，则重新生成新的真实 DOM，随后从页面中替换。
+            
+            b. 当没有找到相同的 key 时，则创建新的真实 DOM，随后渲染到页面。
+      
+      A2. 使用 index 作为 key 可能会产生的问题：
+        1). 若对数据进行：逆序添加，逆序删除等破坏顺序的操作，会产生没有必要的真实 DOM 更新，降低效率。
+
+        2). 若结构中包含输入类 DOM，会产生错误的 DOM 更新，界面有问题。
+
+        3). 注意！如果不存在上述操作，仅渲染用于展示列表，使用 index 作为 key 是完全没有问题的。
+      
+      A3. 开发中如果选择 key：
+        1. 最好使用每条数据的唯一标识作为 keu，比如 id，手机号，学号等
+        2. 如果只是简单的展示数据，使用 index 也是可以的。
+    */
+  </script>
+</body>
+</html>
